@@ -1,0 +1,49 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ SITE.name }}{% endblock %}</title>
+  <link rel="alternate" type="application/rss+xml" title="{{ SITE.name }}" href="{% url 'feed' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    {% if BG_IS_GIF %}<img src="{% static SITE.background %}" alt="">
+    {% else %}<video autoplay muted loop playsinline preload="auto"><source src="{% static SITE.background %}"></video>{% endif %}
+    <div class="overlay"></div>
+  </div>
+
+  <header class="nav">
+    <a class="brand" href="{% url 'home' %}">{{ SITE.name }}</a>
+    <nav class="links" aria-label="Main">
+      <a href="{% url 'home' %}"{% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}>Home</a>
+      <a href="{% url 'thoughts' %}"{% if request.resolver_match.url_name == 'thoughts' or request.resolver_match.url_name == 'thought_detail' %} class="active"{% endif %}>Thoughts</a>
+      <a href="{% url 'about' %}"{% if request.resolver_match.url_name == 'about' %} class="active"{% endif %}>About</a>
+    </nav>
+    <div class="nav-right">
+      <form class="search" action="{% url 'search' %}" method="get" role="search">
+        <input id="search-input" type="search" name="q" placeholder="Search topics" autocomplete="off"
+               aria-label="Search topics" data-url="{% url 'search_live' %}">
+        <div id="search-results" class="dropdown" hidden></div>
+      </form>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch light or dark mode">◐</button>
+    </div>
+  </header>
+
+  <main class="wrap">{% block content %}{% endblock %}</main>
+
+  <footer class="foot">
+    <span>© {% now "Y" %} {{ SITE.name }}</span>
+    <span class="foot-links">
+      {% for l in SITE.links %}<a href="{{ l.url }}" rel="noopener">{{ l.label }}</a>{% endfor %}
+      <a href="{% url 'feed' %}">RSS</a>
+    </span>
+  </footer>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

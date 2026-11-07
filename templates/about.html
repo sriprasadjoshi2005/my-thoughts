@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}About · {{ SITE.name }}{% endblock %}
+{% block content %}
+<h1>About</h1>
+<div class="panel prose">{% for p in SITE.about %}<p>{{ p }}</p>{% endfor %}</div>
+{% endblock %}

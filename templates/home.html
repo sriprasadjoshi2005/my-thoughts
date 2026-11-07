@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>{{ SITE.name }}</h1>
+  <p>{{ SITE.tagline }}</p>
+</section>
+<section>
+  <h2 class="section-title">Latest thoughts</h2>
+  {% for thought in thoughts %}{% include "_card.html" with t=thought %}
+  {% empty %}<p class="empty">Nothing here yet. Add your first thought from the admin page.</p>{% endfor %}
+  {% if thoughts %}<p><a class="btn" href="{% url 'thoughts' %}">See all thoughts</a></p>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,4 @@
+<a class="card" href="{{ t.get_absolute_url }}">
+  <h3>{{ t.title }}</h3>
+  <time datetime="{{ t.display_time|date:'c' }}">{{ t.display_time|date:"j F Y, H:i" }}</time>
+</a>

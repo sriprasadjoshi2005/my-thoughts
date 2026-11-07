@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Search · {{ SITE.name }}{% endblock %}
+{% block content %}
+<h1>Search</h1>
+{% if q %}<p class="muted">Results for “{{ q }}”</p>
+  {% for thought in results %}{% include "_card.html" with t=thought %}
+  {% empty %}<p class="empty">No thoughts match “{{ q }}”. Try a different word.</p>{% endfor %}
+{% else %}<p class="empty">Type a word or topic in the search box above.</p>{% endif %}
+{% endblock %}

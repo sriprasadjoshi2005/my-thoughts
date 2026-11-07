@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Thoughts · {{ SITE.name }}{% endblock %}
+{% block content %}
+<div class="head-row">
+  <h1>Thoughts</h1>
+  <div class="pills" role="group" aria-label="Sort thoughts">
+    <a class="pill{% if sort == 'newest' %} active{% endif %}" href="?sort=newest">Newest</a>
+    <a class="pill{% if sort == 'oldest' %} active{% endif %}" href="?sort=oldest">Oldest</a>
+  </div>
+</div>
+{% for thought in page %}{% include "_card.html" with t=thought %}
+{% empty %}<p class="empty">No thoughts yet. Add one from the admin page.</p>{% endfor %}
+{% if page.paginator.num_pages > 1 %}
+<nav class="pager" aria-label="Pages">
+  {% if page.has_previous %}<a class="pill" href="?sort={{ sort }}&page={{ page.previous_page_number }}">Previous</a>{% endif %}
+  {% for n in page.paginator.page_range %}
+    <a class="pill{% if n == page.number %} active{% endif %}" href="?sort={{ sort }}&page={{ n }}">{{ n }}</a>
+  {% endfor %}
+  {% if page.has_next %}<a class="pill" href="?sort={{ sort }}&page={{ page.next_page_number }}">Next</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

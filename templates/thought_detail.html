@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load blog_extras %}
+{% block title %}{{ SITE.name }}{% endblock %}
+{% block content %}
+<p><a class="back" href="{% url 'thoughts' %}">Back to thoughts</a></p>
+<article class="panel">
+  {% if not thought.is_published %}<p class="empty">Draft preview. Only you can see this.</p>{% endif %}
+  <div class="prose">{{ thought.body|markdown }}</div>
+  {% if thought.display_time %}<time datetime="{{ thought.display_time|date:'c' }}">{{ thought.display_time|date:"j F Y, H:i" }}</time>{% endif %}
+  <div class="share">
+    <span>Share</span>
+    <a class="pill" href="https://wa.me/?text={{ share_url|urlencode }}" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="pill" href="https://twitter.com/intent/tweet?url={{ share_url|urlencode }}" target="_blank" rel="noopener">X</a>
+    <a class="pill" href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url|urlencode }}" target="_blank" rel="noopener">LinkedIn</a>
+    <button class="pill" id="copy-link" type="button" data-url="{{ share_url }}">Copy link</button>
+  </div>
+</article>
+{% endblock %}
