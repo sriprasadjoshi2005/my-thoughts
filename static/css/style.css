@@ -87,3 +87,4 @@ time{font-size:.88rem}
 .dl-menu[hidden]{display:none}
 .dl-menu button{display:block;width:100%;padding:9px 12px;border:0;border-radius:10px;background:none;color:var(--text);font:inherit;text-align:left;cursor:pointer}
 .dl-menu button:hover{background:var(--accent);color:#fff}
+.prose img,.prose video{display:block;max-width:100%;height:auto;margin:1.2em 0;border-radius:12px}
