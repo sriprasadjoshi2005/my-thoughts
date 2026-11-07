@@ -5,7 +5,7 @@
 <p><a class="back" href="{% url 'thoughts' %}">Back to thoughts</a></p>
 <article class="panel" id="thought" data-id="{{ thought.pk }}" data-site="{{ SITE.name }}">
   {% if not thought.is_published %}<p class="empty">Draft preview. Only you can see this.</p>{% endif %}
-  <div class="prose">{{ thought.body|markdown }}</div>
+    <div class="prose">{{ thought.rendered_body }}</div>
   {% if thought.display_time %}<time datetime="{{ thought.display_time|date:'c' }}">{{ thought.display_time|date:"j F Y, H:i" }}</time>{% endif %}
   <div class="share">
     <span>Share</span>
