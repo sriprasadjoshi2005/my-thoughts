@@ -42,7 +42,6 @@
     <span>© {% now "Y" %} {{ SITE.name }}</span>
     <span class="foot-links">
       {% for l in SITE.links %}<a href="{{ l.url }}" rel="noopener">{{ l.label }}</a>{% endfor %}
-      <a href="{% url 'feed' %}">RSS</a>
     </span>
   </footer>
   <script src="{% static 'js/main.js' %}"></script>
