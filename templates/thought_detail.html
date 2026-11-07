@@ -13,6 +13,13 @@
     <a class="pill" href="https://twitter.com/intent/tweet?url={{ share_url|urlencode }}" target="_blank" rel="noopener">X</a>
     <a class="pill" href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url|urlencode }}" target="_blank" rel="noopener">LinkedIn</a>
     <button class="pill" id="copy-link" type="button" data-url="{{ share_url }}">Copy link</button>
+    <div class="dl" id="dl">
+      <button class="pill" id="dl-toggle" type="button" aria-expanded="false">Download</button>
+      <div class="dl-menu" id="dl-menu" hidden>
+        <button type="button" id="dl-text">Download text</button>
+        <button type="button" id="dl-image">Download as image</button>
+      </div>
+    </div>
   </div>
 </article>
 {% endblock %}
