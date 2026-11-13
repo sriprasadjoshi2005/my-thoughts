@@ -48,10 +48,19 @@ class Thought(models.Model):
 
 
 class ThoughtMedia(models.Model):
+    POSITIONS = [
+        ("top", "Top (before the text)"),
+        ("bottom", "Bottom (after the text)"),
+    ]
+
     thought = models.ForeignKey(Thought, on_delete=models.CASCADE, related_name="media")
     file = models.FileField(
         upload_to="thoughts/%Y/%m/",
         validators=[FileExtensionValidator(["jpg", "jpeg", "png", "gif", "webp", "mp4", "webm"]), check_size],
+    )
+    position = models.CharField(
+        max_length=6, choices=POSITIONS, default="bottom",
+        help_text="Used when you don’t paste this file’s code into the text.",
     )
     caption = models.CharField(max_length=200, blank=True, help_text="Short description, used as the image’s alt text.")
 
