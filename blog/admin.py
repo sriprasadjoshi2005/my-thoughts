@@ -10,7 +10,7 @@ admin.site.site_title = "Thoughts admin"
 class MediaInline(admin.StackedInline):
     model = ThoughtMedia
     extra = 1
-    fields = ("file", "caption", "snippet")
+    fields = ("file", "position", "caption", "snippet")
     readonly_fields = ("snippet",)
 
     @admin.display(description="Code to place it in the text")
