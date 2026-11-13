@@ -36,11 +36,11 @@ class Thought(models.Model):
         return reverse("thought_detail", args=[self.pk])
 
     def rendered_body(self):
-        html = render_markdown(self.body)
-        # Attachments not placed in the text are shown after it.
-        extra = [media_html(m.file.url, m.caption) for m in self.media.all()
-                 if m.file.url not in self.body]
-        return mark_safe(html + "".join(extra))
+        # Files whose code isn't in the text are placed by their Position setting.
+        unplaced = [m for m in self.media.all() if m.file.url not in self.body]
+        top = "".join(media_html(m.file.url, m.caption) for m in unplaced if m.position == "top")
+        bottom = "".join(media_html(m.file.url, m.caption) for m in unplaced if m.position != "top")
+        return mark_safe(top + render_markdown(self.body) + bottom)
 
     @classmethod
     def published(cls):
